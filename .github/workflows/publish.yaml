@@ -1,0 +1,29 @@
+name: Build and Publish Electron Package
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  build:
+    name: Build and Publish Electron Package
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Automated Version Bump
+        uses: phips28/gh-action-bump-version@master
+        with:
+          tag-prefix:  'v'
+      - name: Install node
+        uses: actions/setup-node@v1
+      - name: Build bundle
+        run: npm install
+        env:
+          NODE_ENV: dev
+      - run: npm run typegen
+      - run: npm run build
+      - run: npm run publish

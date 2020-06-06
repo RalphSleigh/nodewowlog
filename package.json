@@ -10,7 +10,8 @@
     "typegen": "graphql-codegen --config codegen.yml",
     "build": "npx tsc --build ./src/server/tsconfig.json && npx webpack",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "publish": "electron-builder -p always"
   },
   "author": "Ralph Sleigh",
   "license": "ISC",
