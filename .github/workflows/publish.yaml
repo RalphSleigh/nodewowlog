@@ -36,3 +36,5 @@ jobs:
           NODE_ENV: dev
       - run: npm run build
       - run: npm run publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
