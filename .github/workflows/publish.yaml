@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build and Publish Electron Package
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       NODE_ENV: production
     steps:
