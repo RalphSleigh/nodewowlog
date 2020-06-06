@@ -2,8 +2,7 @@
   "include": [
     "./**/*",
     "./**/*.json",
-    "config.json",
-    "../../package.json"
+    "config.json"
   ],
   "compilerOptions": {
     /* Basic Options */

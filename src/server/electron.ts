@@ -10,10 +10,10 @@ import {parseLogFile} from "./lib/parseLogFile";
 
 const server = Container.get(AppServer)
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-// @ts-ignore
-import packageJSON from "../package.json"
 import {autoUpdater} from "electron-updater";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageJSON = require("../package.json");
 
 server.listen("localhost", 0).then(appServer => {
 

@@ -8,6 +8,7 @@
     "electron": "npx electron build/electron.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "typegen": "graphql-codegen --config codegen.yml",
+    "build": "npx tsc --build ./src/server/tsconfig.json && npx webpack",
     "pack": "electron-builder --dir",
     "dist": "electron-builder"
   },
@@ -96,6 +97,7 @@
   "build": {
     "appId": "nodewowlog",
     "files": [
+      "./package.json",
       "./build/**/*",
       "./static/**/*",
       "./staticData/**/*"
