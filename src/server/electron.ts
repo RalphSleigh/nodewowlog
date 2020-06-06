@@ -22,6 +22,8 @@ server.listen("localhost", 0).then(appServer => {
     const port = appServer.address()?.port
 
     async function createWindow() {
+        autoUpdater.checkForUpdatesAndNotify();
+
         const win = new BrowserWindow({
             width: 1024,
             height: 768,
@@ -58,9 +60,9 @@ server.listen("localhost", 0).then(appServer => {
 
     app.whenReady().then(createWindow)
 
-    app.on('ready', function()  {
-        autoUpdater.checkForUpdatesAndNotify();
-    });
+    //app.on('ready', function()  {
+
+   // });
 
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
