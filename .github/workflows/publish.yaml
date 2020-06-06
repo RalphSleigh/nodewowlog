@@ -17,7 +17,7 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v1
       - name: Bump Version
-        run: npm version patch
+        run: npm --no-git-tag-version version patch
       - name: Build Package
         run: npm install
         env:
