@@ -35,12 +35,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit-message: Update version code
-            committer: GitHub <noreply@github.com>
-            author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-            title: 'Update version code'
-            body: |
-              Update version code
-            branch: master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update version code
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: 'Update version code'
+          body: |
+            Update version code
+          branch: master
