@@ -1,6 +1,6 @@
 {
   "name": "nodewowlog",
-  "version": "1.0.0",
+  "version": "1.0.9",
   "description": "World of Warcraft Combat Log Parser",
   "main": "build/electron.js",
   "scripts": {
@@ -105,7 +105,9 @@
     ],
     "win": {
       "target": "nsis",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     },
     "nsis": {}
   }
