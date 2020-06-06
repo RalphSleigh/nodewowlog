@@ -1,0 +1,16 @@
+build/*
+dist/*
+!build/icon.png
+client_build/*
+node_modules/*
+static/vendor.bundle.js
+static/main.bundle.js
+**/__generated__/*
+/.graphqlconfig
+/schema.graphql
+diskcache/*
+diskbincache/*
+.idea/*
+
+out/
+/src/client/queries/types.tsx

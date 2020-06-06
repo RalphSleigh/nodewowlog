@@ -1,0 +1,231 @@
+body {
+    overflow-y: scroll;
+}
+
+.classColour1 {
+     color: #C79C6E;
+ }
+
+.classColour2 {
+    color: #F58CBA;
+}
+
+.classColour3 {
+    color: #A9D271;
+}
+
+.classColour4 {
+    color: #FFF569;
+}
+
+.classColour5 {
+    color: #FFFFFF;
+}
+
+.classColour6 {
+    color: #C41F3B;
+}
+
+.classColour7 {
+    color: #0070DE;
+}
+
+.classColour8 {
+    color: #40C7EB;
+}
+
+.classColour9 {
+    color: #8787ED;
+}
+
+.classColour10 {
+    color: #00FF96;
+}
+
+.classColour11 {
+    color: #FF7D0A;
+}
+
+.classColour12 {
+    color: #A330C9;
+}
+
+.classBGColour0 {
+    background-color: #a00000;
+}
+
+.classBGColour1 {
+    background-color: #C79C6E;
+}
+
+.classBGColour2 {
+    background-color: #F58CBA;
+}
+
+.classBGColour3 {
+    background-color: #A9D271;
+}
+
+.classBGColour4 {
+    background-color: #FFF569;
+}
+
+.classBGColour5 {
+    background-color: #FFFFFF;
+}
+
+.classBGColour6 {
+    background-color: #C41F3B;
+}
+
+.classBGColour7 {
+    background-color: #0070DE;
+}
+
+.classBGColour8 {
+    background-color: #40C7EB;
+}
+
+.classBGColour9 {
+    background-color: #8787ED;
+}
+
+.classBGColour10 {
+    background-color: #00FF96;
+}
+
+.classBGColour11 {
+    background-color: #FF7D0A;
+}
+
+.classBGColour12 {
+    background-color: #A330C9;
+}
+
+.classFillColour0 {
+    fill: #a00000;
+}
+
+.classFillColour1 {
+    fill: #C79C6E;
+}
+
+.classFillColour2 {
+    fill: #F58CBA;
+}
+
+.classFillColour3 {
+    fill: #A9D271;
+}
+
+.classFillColour4 {
+    fill: #FFF569;
+}
+
+.classFillColour5 {
+    fill: #FFFFFF;
+}
+
+.classFillColour6 {
+    fill: #C41F3B;
+}
+
+.classFillColour7 {
+    fill: #0070DE;
+}
+
+.classFillColour8 {
+    fill: #40C7EB;
+}
+
+.classFillColour9 {
+    fill: #8787ED;
+}
+
+.classFillColour10 {
+    fill: #00FF96;
+}
+
+.classFillColour11 {
+    fill: #FF7D0A;
+}
+
+.classFillColour12 {
+    fill: #A330C9;
+}
+
+.SVGselected {
+    stroke: black;
+    stroke-width: 2;
+}
+
+.chooserDropdown.dropdown-menu.show {
+    width:500px;
+    display: flex;
+}
+
+.chooserDropdown div.column {
+    flex-basis:50%
+}
+
+.damageTable {
+    width: 100%;
+    display: grid;
+}
+
+.spellTable {
+    grid-template-columns: auto auto 1fr auto;
+}
+
+.creatureTable {
+    grid-template-columns: auto auto 1fr auto auto;
+}
+
+.damageTable > div {
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+}
+
+.damageTable > div > h1 {
+    font-weight: 500;
+    font-size: 100%;
+    margin: 5px 3px;
+}
+
+.damageTable > div > p {
+    margin: 3px;
+}
+
+.damageTable > div > img {
+    display: block;
+    width: 21px;
+    margin: 3px;
+}
+
+.damageTable > div.subTable {
+    padding: 10px;
+}
+
+.spellTable .subTable {
+    grid-column-end: span 4;
+}
+
+.creatureTable .subTable {
+    grid-column-end: span 5;
+}
+
+.tableBar {
+    width: 100%;
+    height: 15px;
+    display: flex;
+}
+
+.tableBar > div {
+    height: 15px;
+}
+
+.tableBar > div:nth-child(even) {
+    opacity: 0.8;
+}

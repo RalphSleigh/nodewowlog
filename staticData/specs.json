@@ -1,0 +1,290 @@
+{
+	"102": {
+		"classID": 11,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_druid.jpg",
+		"className": "Druid",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_nature_starfall.jpg",
+		"specName": "Balance"
+	},
+	"103": {
+		"classID": 11,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_druid.jpg",
+		"className": "Druid",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_druid_catform.jpg",
+		"specName": "Feral"
+	},
+	"104": {
+		"classID": 11,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_druid.jpg",
+		"className": "Druid",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_racial_bearform.jpg",
+		"specName": "Guardian"
+	},
+	"105": {
+		"classID": 11,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_druid.jpg",
+		"className": "Druid",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_nature_healingtouch.jpg",
+		"specName": "Restoration"
+	},
+	"250": {
+		"classID": 6,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_classicon.jpg",
+		"className": "Death Knight",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_bloodpresence.jpg",
+		"specName": "Blood"
+	},
+	"251": {
+		"classID": 6,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_classicon.jpg",
+		"className": "Death Knight",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_frostpresence.jpg",
+		"specName": "Frost"
+	},
+	"252": {
+		"classID": 6,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_classicon.jpg",
+		"className": "Death Knight",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_deathknight_unholypresence.jpg",
+		"specName": "Unholy"
+	},
+	"253": {
+		"classID": 3,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_hunter.jpg",
+		"className": "Hunter",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_hunter_bestialdiscipline.jpg",
+		"specName": "Beast Mastery"
+	},
+	"254": {
+		"classID": 3,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_hunter.jpg",
+		"className": "Hunter",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_hunter_focusedaim.jpg",
+		"specName": "Marksmanship"
+	},
+	"255": {
+		"classID": 3,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_hunter.jpg",
+		"className": "Hunter",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_hunter_camouflage.jpg",
+		"specName": "Survival"
+	},
+	"256": {
+		"classID": 5,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_priest.jpg",
+		"className": "Priest",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_holy_powerwordshield.jpg",
+		"specName": "Discipline"
+	},
+	"257": {
+		"classID": 5,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_priest.jpg",
+		"className": "Priest",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_holy_guardianspirit.jpg",
+		"specName": "Holy"
+	},
+	"258": {
+		"classID": 5,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_priest.jpg",
+		"className": "Priest",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_shadow_shadowwordpain.jpg",
+		"specName": "Shadow"
+	},
+	"259": {
+		"classID": 4,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_rogue.jpg",
+		"className": "Rogue",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_rogue_deadlybrew.jpg",
+		"specName": "Assassination"
+	},
+	"260": {
+		"classID": 4,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_rogue.jpg",
+		"className": "Rogue",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_rogue_waylay.jpg",
+		"specName": "Outlaw"
+	},
+	"261": {
+		"classID": 4,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_rogue.jpg",
+		"className": "Rogue",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_stealth.jpg",
+		"specName": "Subtlety"
+	},
+	"262": {
+		"classID": 7,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_shaman.jpg",
+		"className": "Shaman",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_nature_lightning.jpg",
+		"specName": "Elemental"
+	},
+	"263": {
+		"classID": 7,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_shaman.jpg",
+		"className": "Shaman",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_shaman_improvedstormstrike.jpg",
+		"specName": "Enhancement"
+	},
+	"264": {
+		"classID": 7,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_shaman.jpg",
+		"className": "Shaman",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_nature_magicimmunity.jpg",
+		"specName": "Restoration"
+	},
+	"265": {
+		"classID": 9,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warlock.jpg",
+		"className": "Warlock",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_shadow_deathcoil.jpg",
+		"specName": "Affliction"
+	},
+	"266": {
+		"classID": 9,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warlock.jpg",
+		"className": "Warlock",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_shadow_metamorphosis.jpg",
+		"specName": "Demonology"
+	},
+	"267": {
+		"classID": 9,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warlock.jpg",
+		"className": "Warlock",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_shadow_rainoffire.jpg",
+		"specName": "Destruction"
+	},
+	"268": {
+		"classID": 10,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_monk.jpg",
+		"className": "Monk",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_monk_brewmaster_spec.jpg",
+		"specName": "Brewmaster"
+	},
+	"269": {
+		"classID": 10,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_monk.jpg",
+		"className": "Monk",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_monk_windwalker_spec.jpg",
+		"specName": "Windwalker"
+	},
+	"270": {
+		"classID": 10,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_monk.jpg",
+		"className": "Monk",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_monk_mistweaver_spec.jpg",
+		"specName": "Mistweaver"
+	},
+	"577": {
+		"classID": 12,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/achievement_boss_illidan.jpg",
+		"className": "Demon Hunter",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_demonhunter_specdps.jpg",
+		"specName": "Havoc"
+	},
+	"581": {
+		"classID": 12,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/achievement_boss_illidan.jpg",
+		"className": "Demon Hunter",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_demonhunter_spectank.jpg",
+		"specName": "Vengeance"
+	},
+	"62": {
+		"classID": 8,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_mage.jpg",
+		"className": "Mage",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_holy_magicalsentry.jpg",
+		"specName": "Arcane"
+	},
+	"63": {
+		"classID": 8,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_mage.jpg",
+		"className": "Mage",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_fire_firebolt02.jpg",
+		"specName": "Fire"
+	},
+	"64": {
+		"classID": 8,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_mage.jpg",
+		"className": "Mage",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_frost_frostbolt02.jpg",
+		"specName": "Frost"
+	},
+	"65": {
+		"classID": 2,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_paladin.jpg",
+		"className": "Paladin",
+		"role": 4,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_holy_holybolt.jpg",
+		"specName": "Holy"
+	},
+	"66": {
+		"classID": 2,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_paladin.jpg",
+		"className": "Paladin",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_paladin_shieldofthetemplar.jpg",
+		"specName": "Protection"
+	},
+	"70": {
+		"classID": 2,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_paladin.jpg",
+		"className": "Paladin",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/spell_holy_auraoflight.jpg",
+		"specName": "Retribution"
+	},
+	"71": {
+		"classID": 1,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warrior.jpg",
+		"className": "Warrior",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_warrior_savageblow.jpg",
+		"specName": "Arms"
+	},
+	"72": {
+		"classID": 1,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warrior.jpg",
+		"className": "Warrior",
+		"role": 1,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_warrior_innerrage.jpg",
+		"specName": "Fury"
+	},
+	"73": {
+		"classID": 1,
+		"classIconURL": "https://render-eu.worldofwarcraft.com/icons/56/classicon_warrior.jpg",
+		"className": "Warrior",
+		"role": 2,
+		"specIconURL": "https://render-eu.worldofwarcraft.com/icons/56/ability_warrior_defensivestance.jpg",
+		"specName": "Protection"
+	}
+}

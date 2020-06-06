@@ -1,0 +1,11 @@
+overwrite: true
+schema: "http://localhost:8080/graphql"
+documents: "src/client/queries/*"
+generates:
+  src/client/queries/types.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "fragment-matcher"
+    config:
+      apolloClientVersion: 3
