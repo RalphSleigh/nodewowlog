@@ -1,6 +1,6 @@
 # Nodewowlog
 
-A world of warcraft combat log parser written in Typescript, GraphQL and React.
+A World of Warcraft combat log parser written in Typescript, GraphQL and React.
 
 ## Usage
 
