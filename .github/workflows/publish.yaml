@@ -34,7 +34,7 @@ jobs:
         run: |
           git add package.json package-lock.json
           git commit -m "Bump version code"
-          git push origin
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
