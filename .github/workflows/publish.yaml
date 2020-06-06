@@ -32,7 +32,7 @@ jobs:
           git config user.email "<>"
       - name: commit
         run: |
-          git add .
+          git add package.json package-lock.json
           git commit -m "Bump version code"
           git push origin
       - name: Create Pull Request
