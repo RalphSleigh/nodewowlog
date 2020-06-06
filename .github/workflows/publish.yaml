@@ -26,3 +26,21 @@ jobs:
       - run: npm run publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit version number
+        uses: EndBug/add-and-commit@v4 # You can change this to use a specific version
+        with:
+          add: '.'
+          message: 'bump version'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            commit-message: Update version code
+            committer: GitHub <noreply@github.com>
+            author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+            title: 'Update version code'
+            body: |
+              Update version code
+            branch: master
