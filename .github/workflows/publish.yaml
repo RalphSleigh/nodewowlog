@@ -34,7 +34,7 @@ jobs:
         run: |
           git add package.json package-lock.json
           git commit -m "Bump version code"
-          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git"
+          git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/RalphSleigh/nodewowlog.git"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:
