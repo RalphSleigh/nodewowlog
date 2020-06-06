@@ -13,6 +13,7 @@ const server = Container.get(AppServer)
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
 // @ts-ignore
 import packageJSON from "../package.json"
+import {autoUpdater} from "electron-updater";
 
 server.listen("localhost", 0).then(appServer => {
 
@@ -56,6 +57,10 @@ server.listen("localhost", 0).then(appServer => {
     }
 
     app.whenReady().then(createWindow)
+
+    app.on('ready', function()  {
+        autoUpdater.checkForUpdatesAndNotify();
+    });
 
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
