@@ -1,10 +1,10 @@
-#Nodewowlog
+# Nodewowlog
 
 A world of warcraft combat log parser written in Typescript, GraphQL and React.
 
-##Usage
+## Usage
 
-###Basic:
+### Basic:
 
 1) Download and install the latest release from the releases section. 
 
@@ -14,7 +14,7 @@ A world of warcraft combat log parser written in Typescript, GraphQL and React.
 
 4) Open the application and select the log file in the chooser that pops up. This should be `WoWCombatLog.txt` in the `Logs` directory of your wow installation.
 
-###Advanced:
+### Advanced:
  
 If you already have node and git installed, you should be able to do:
  
@@ -28,7 +28,7 @@ npm start -- --log=c:\path\to\log.txt
 
 Then browse to http://localhost:8080/
 
-##FAQ
+## FAQ
 
 **Q. Why?**  
 Lockdown, and I wanted a project to investigate GraphQL thats more interesting that a todo list.
@@ -44,7 +44,7 @@ The warnings are correct, You really shouldn't run untrusted software from the i
 **Q. Mac/Linux support?**  
 The advanced method *should* run on Mac/Linux without any modifications.
 
-##Todo:
+## Todo:
 
 * Healing pane
 * Player deaths pane
