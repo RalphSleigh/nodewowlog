@@ -1,6 +1,6 @@
 {
   "name": "nodewowlog",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "World of Warcraft Combat Log Parser",
   "main": "build/electron.js",
   "scripts": {
