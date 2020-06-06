@@ -9,15 +9,15 @@ jobs:
   bump-version:
     name: Bump Version
     runs-on: ubuntu-latest
-      env:
-        NODE_ENV: production
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v2
-        - name: Automated Version Bump
-          uses: phips28/gh-action-bump-version@master
-          with:
-            tag-prefix:  'v'
+    env:
+      NODE_ENV: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Automated Version Bump
+        uses: phips28/gh-action-bump-version@master
+        with:
+          tag-prefix:  'v'
 
   build:
     name: Build and Publish Electron Package
