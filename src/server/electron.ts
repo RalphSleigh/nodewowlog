@@ -10,6 +10,10 @@ import {parseLogFile} from "./lib/parseLogFile";
 
 const server = Container.get(AppServer)
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore
+import packageJSON from "../package.json"
+
 server.listen("localhost", 0).then(appServer => {
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -18,13 +22,16 @@ server.listen("localhost", 0).then(appServer => {
 
     async function createWindow() {
         const win = new BrowserWindow({
-            width: 800,
-            height: 600,
+            width: 1024,
+            height: 768,
             webPreferences: {
                 nodeIntegration: false,
                 contextIsolation: true,
-            }
+            },
+            title: `Nodewowlog ${packageJSON.version}`
         })
+
+        win.on("page-title-updated", e => e.preventDefault())
 
         win.setMenuBarVisibility(false)
 
