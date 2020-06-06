@@ -6,19 +6,6 @@ on:
       - production
 
 jobs:
-  bump-version:
-    name: Bump Version
-    runs-on: ubuntu-latest
-    env:
-      NODE_ENV: production
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Automated Version Bump
-        uses: phips28/gh-action-bump-version@master
-        with:
-          tag-prefix:  'release-'
-
   build:
     name: Build and Publish Electron Package
     runs-on: windows-latest
@@ -30,6 +17,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install node
         uses: actions/setup-node@v1
+      - name: Bump Version
+        run: npm version patch
       - name: Build Package
         run: npm install
         env:
