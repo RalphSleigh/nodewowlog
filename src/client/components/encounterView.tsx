@@ -86,15 +86,15 @@ export const EncounterView: FC<{ encounterId: number; live: boolean }> = ({encou
     }
 
     return <Grid container spacing={3}>
-        <Grid item sm={2}>
+        <Grid item>
             <CreatureChooser titlePrefix="Source" creatures={data.Encounter.creatures}
                              filterSetState={source}/>
         </Grid>
-        <Grid item sm={2}>
+        <Grid item>
             <CreatureChooser titlePrefix="Target" creatures={data.Encounter.creatures}
                              filterSetState={target}/>
         </Grid>
-        <Grid item sm={2}>
+        <Grid item>
             <Box my={2}>
                 <ToggleButtonGroup
                     size="small"
@@ -107,7 +107,7 @@ export const EncounterView: FC<{ encounterId: number; live: boolean }> = ({encou
                 </ToggleButtonGroup>
             </Box>
         </Grid>
-        <Grid item sm={2}>
+        <Grid item>
             <Box my={2}>
                 <ToggleButtonGroup
                     size="small"
