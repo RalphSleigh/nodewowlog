@@ -44,8 +44,7 @@ jobs:
 #      - run: npm run publish
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Open RP
-        uses: technote-space/create-pr-action@v2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
         with:
-          PR_BRANCH_NAME: 'update_version'
-          PR_TITLE: 'Update version'
+          base: 'master'
