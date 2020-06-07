@@ -8,22 +8,46 @@ on:
 jobs:
   build:
     name: Build and Publish Electron Package
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env:
       NODE_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Automated Version Bump
-        uses: phips28/gh-action-bump-version@master
-        with:
-          tag-prefix:  'v'
       - name: Install node
         uses: actions/setup-node@v1
-      - name: Build bundle
-        run: npm install
+      - name: Bump Version
+        run: npm --no-git-tag-version version patch
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: commit
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version code"
+          git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/RalphSleigh/nodewowlog.git"
         env:
-          NODE_ENV: dev
-      - run: npm run typegen
-      - run: npm run build
-      - run: npm run publish
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Automated Version Bump
+#        uses: RalphSleigh/gh-action-bump-version@master
+#      - name: Build Package
+#        run: npm install
+#        env:
+#          NODE_ENV: dev
+#      - run: npm run build
+#      - run: npm run publish
+#        env:
+#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update version code
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          title: 'Update version code'
+          body: |
+            Update version code
+          branch: master
