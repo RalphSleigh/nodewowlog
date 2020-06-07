@@ -44,13 +44,8 @@ jobs:
 #      - run: npm run publish
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Initialize Pull Request
-        uses: gha-utilities/init-pull-request@v0.1.8
-        with:
-          verbose: true
-          pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-          head: production
-          base: master
-          title: 'Update version code'
-          body: >
-            Update version code
+      - name: Open RP
+          uses: technote-space/create-pr-action@v2
+          with:
+            PR_BRANCH_NAME: 'update_version'
+            PR_TITLE: 'Update version'
