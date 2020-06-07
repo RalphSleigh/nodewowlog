@@ -26,12 +26,10 @@ jobs:
         run: |
           git add package.json package-lock.json
           git commit -m "Bump version code"
-          git push origin production
+          git push
         env:
           GIT_TRACE: 1
           GIT_CURL_VERBOSE: 1
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #      - name: Automated Version Bump
 #        uses: RalphSleigh/gh-action-bump-version@master
 #      - name: Build Package
