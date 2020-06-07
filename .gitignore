@@ -13,4 +13,3 @@ diskbincache/*
 .idea/*
 
 out/
-/src/client/queries/types.tsx

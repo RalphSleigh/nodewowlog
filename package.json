@@ -1,6 +1,6 @@
 {
   "name": "nodewowlog",
-  "version": "1.0.0",
+  "version": "1.0.13",
   "description": "World of Warcraft Combat Log Parser",
   "main": "build/electron.js",
   "scripts": {
@@ -9,9 +9,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "typegen": "graphql-codegen --config codegen.yml",
     "build": "npx tsc --build ./src/server/tsconfig.json && npx webpack",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "publish": "electron-builder -p always"
+    "pack": "electron-builder --dir --win",
+    "dist": "electron-builder --win",
+    "publish": "electron-builder --win -p always"
   },
   "author": "Ralph Sleigh",
   "license": "ISC",
@@ -105,7 +105,9 @@
     ],
     "win": {
       "target": "nsis",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     },
     "nsis": {}
   }
