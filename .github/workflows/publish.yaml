@@ -18,22 +18,22 @@ jobs:
         uses: actions/setup-node@v1
       - name: Bump Version
         run: npm --no-git-tag-version version patch
-#      - name: setup git config
-#        run: |
-#          git config user.name "GitHub Actions Bot"
-#          git config user.email "<>"
-#      - name: commit
-#        run: |
-#          git add package.json package-lock.json
-#          git commit -m "Bump version code"
-#        env:
-#          GIT_TRACE: 1
-#          GIT_CURL_VERBOSE: 1
-#      - name: Push changes
-#        uses: ad-m/github-push-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          branch: 'production'
+      - name: setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      - name: commit
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Bump version code"
+        env:
+          GIT_TRACE: 1
+          GIT_CURL_VERBOSE: 1
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: 'production'
 #      - name: Automated Version Bump
 #        uses: RalphSleigh/gh-action-bump-version@master
 #      - name: Build Package
