@@ -1,8 +1,8 @@
-import { Damage } from "./damage";
+import { Event } from "./event";
 import { Encounter } from "./encounter";
 
-export class DamageManager {
-  public events: Damage[];
+export class EventsManager {
+  public events: Event[];
   private encounter: Encounter;
 
   constructor(encounter: Encounter) {
@@ -10,7 +10,7 @@ export class DamageManager {
     this.events = [];
   }
 
-  add(event: Damage): void {
+  add(event: Event): void {
     this.events.push(event);
   }
 }

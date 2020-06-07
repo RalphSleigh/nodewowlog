@@ -1,6 +1,6 @@
-import {Event} from "./lineParser";
+import {LogLine} from "./lineParser";
 
-export function SpellPeriodicHeal({dateTimeString, fields, encounter}: Event): void {
+export function SpellPeriodicHeal({dateTimeString, fields, encounter}: LogLine): void {
     // console.log(`parsing Spelldamage`);
     const time = encounter.getTimeOffset(dateTimeString)
 
@@ -13,7 +13,7 @@ export function SpellPeriodicHeal({dateTimeString, fields, encounter}: Event): v
     const amount = fields.parseNumber(28);
     const crit = fields.parseBoolean(35)
     encounter.damageManager.add(
-        new Damage(
+        new Event(
             encounter,
             time,
             sourceCreature,

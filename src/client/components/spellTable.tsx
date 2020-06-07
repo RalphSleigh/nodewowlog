@@ -53,7 +53,7 @@ export const SpellTable: FC<{
             <TableHead>
                 <StripedTableRow>
                     <TableCell style={{width:'25%'}}>Spell</TableCell>
-                    <TableCell>Damage</TableCell>
+                    <TableCell>Event</TableCell>
                     <TableCell style={{width: '5%'}}/>
                 </StripedTableRow>
             </TableHead>

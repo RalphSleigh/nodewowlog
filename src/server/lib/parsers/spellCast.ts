@@ -1,9 +1,9 @@
 import { LogFields } from "./logFields";
 import { Encounter, EncounterStatus } from "../data/encounter";
-import { Event } from "./lineParser";
-import { Damage } from "../data/damage";
+import { LogLine } from "./lineParser";
+import { Event } from "../data/event";
 
-export function SpellCast({ fields, encounter, dateTimeString }: Event): void {
+export function SpellCast({ fields, encounter, dateTimeString }: LogLine): void {
   const time = encounter.getTimeOffset(dateTimeString)
   const caster = encounter.creatureManager.fromFields(fields, 0);
   const targetCreature = encounter.creatureManager.fromFields(fields, 4);

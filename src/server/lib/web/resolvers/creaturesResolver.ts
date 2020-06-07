@@ -1,6 +1,6 @@
 import {ICreature} from "../../data/creature";
 import {Arg, ClassType, FieldResolver, Resolver, Root} from "type-graphql";
-import {Damage} from "../../data/damage";
+import {Event} from "../../data/event";
 import {LogFile} from "../../data/logFile";
 import {Player} from "../../data/player";
 import {BlizzardAPIWrapper} from "../../blizzardAPI/blizzardAPIWrapper";
@@ -16,8 +16,8 @@ export function AbstractCreatureResolver(creatureType: ClassType): any {
         }
 
         /*
-      @FieldResolver(() => [Damage])
-      damageDone(@Root() creature: ICreature): Damage[] {
+      @FieldResolver(() => [Event])
+      damageDone(@Root() creature: ICreature): Event[] {
       return creature.encounter.damageManager.graphGetDamageDone(creature);
       }
 

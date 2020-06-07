@@ -21,7 +21,7 @@ import {SpellEnergize} from "./spellEnergize";
 
 export type getDate = () => Date
 
-export interface Event {
+export interface LogLine {
   dateTimeString: string;
   fields: LogFields;
   logFile: LogFile;
@@ -29,7 +29,7 @@ export interface Event {
 }
 
 export interface EventParser {
-  (event: Event): void;
+  (event: LogLine): void;
 }
 
 export function parseLine(logFile: LogFile, line: string): void {

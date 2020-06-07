@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-unused-vars */
 import {Arg, Args, ArgsType, ClassType, Field, FieldResolver, Resolver, Root} from "type-graphql";
-import {CreatureDamageEvents, FilteredDamageEvents, GenericDamageEvents, SpellDamageEvents} from "../../data/genericDamageEvents";
+import {CreatureDamageEvents, FilteredDamageEvents, GenericSummableEvents, SpellDamageEvents} from "../../data/genericSummableEvents";
 import {CreatureFilters} from "../../data/creatureFilters";
 import {IsString} from "class-validator";
 
@@ -31,7 +31,7 @@ export function createBaseResolver(eventsType: ClassType): any {
     @Resolver(of => eventsType, { isAbstract: true })
     abstract class BaseResolver {
         @FieldResolver(() => [SpellDamageEvents])
-        bySpell(@Root() genericEvents: GenericDamageEvents): SpellDamageEvents[] {
+        bySpell(@Root() genericEvents: GenericSummableEvents): SpellDamageEvents[] {
             return genericEvents.bySpell()
         }
 
