@@ -26,9 +26,6 @@ jobs:
         run: |
           git add package.json package-lock.json
           git commit -m "Bump version code"
-        env:
-          GIT_TRACE: 1
-          GIT_CURL_VERBOSE: 1
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -44,14 +41,14 @@ jobs:
 #      - run: npm run publish
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+
+  pull-request:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Update version code
-          committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          title: 'Update version code'
-          body: |
-            Update version code
-          branch: master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "Pulling ${{ github.ref }} into master"
