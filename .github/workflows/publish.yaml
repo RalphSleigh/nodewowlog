@@ -31,16 +31,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: 'production'
-#      - name: Automated Version Bump
-#        uses: RalphSleigh/gh-action-bump-version@master
-#      - name: Build Package
-#        run: npm install
-#        env:
-#          NODE_ENV: dev
-#      - run: npm run build
-#      - run: npm run publish
-#        env:
-#          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Package
+        run: npm install
+        env:
+          NODE_ENV: dev
+      - run: npm run build
+      - run: npm run publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pull-request:
     needs: build
