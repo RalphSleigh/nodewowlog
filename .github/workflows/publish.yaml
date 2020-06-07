@@ -54,4 +54,4 @@ jobs:
           title: 'Update version code'
           body: |
             Update version code
-          branch: master
+          branch: production
