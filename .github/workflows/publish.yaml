@@ -45,7 +45,7 @@ jobs:
 #        env:
 #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Open RP
-          uses: technote-space/create-pr-action@v2
-          with:
-            PR_BRANCH_NAME: 'update_version'
-            PR_TITLE: 'Update version'
+        uses: technote-space/create-pr-action@v2
+        with:
+          PR_BRANCH_NAME: 'update_version'
+          PR_TITLE: 'Update version'
