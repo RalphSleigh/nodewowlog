@@ -70,3 +70,15 @@ export class DamageHitEvent extends DamageEvent {}
 @ObjectType({implements: Event, simpleResolvers: true})
 export class DamageTickEvent extends DamageEvent {}
 
+@ObjectType({implements: Event, simpleResolvers: true})
+export class HealingEvent extends SummableEvent {}
+
+@ObjectType({implements: Event, simpleResolvers: true})
+export class HealingHitEvent extends HealingEvent {}
+
+@ObjectType({implements: Event, simpleResolvers: true})
+export class HealingTickEvent extends HealingEvent {}
+
+@ObjectType({implements: Event, simpleResolvers: true})
+export class HealingAbsorbEvent extends HealingEvent {}
+

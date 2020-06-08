@@ -1,4 +1,4 @@
-import {DamageHitEvent, DamageEvent, SummableEvent} from "./event";
+import {DamageHitEvent, SummableEvent} from "./event";
 import {Field, InterfaceType, ObjectType} from "type-graphql";
 import {ICreature} from "./creature";
 import {Spell} from "./spell";

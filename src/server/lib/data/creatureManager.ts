@@ -32,6 +32,10 @@ export class CreatureManager {
 
             this.creatures.set(guid, creature);
         }
+
+        //Flip this if a friendly creature goes hostile
+        if(creature.friendly && !friendly) creature.friendly = false
+
         return creature;
     }
 
@@ -43,6 +47,7 @@ export class CreatureManager {
         const guid = fields.parseString(index);
         const name = fields.parseString(index + 1);
         const friendly = (fields.parseNumber(index + 2) & 0x40) === 0
+
         return this.getCreature(guid, name, friendly);
     }
 
