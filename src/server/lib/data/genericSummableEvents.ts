@@ -1,4 +1,4 @@
-import {Damage, DamageType} from "./damage";
+import {DamageHitEvent, SummableEvent} from "./event";
 import {Field, InterfaceType, ObjectType} from "type-graphql";
 import {ICreature} from "./creature";
 import {Spell} from "./spell";
@@ -6,8 +6,8 @@ import {getCreatureFilterFunction} from "./creatureFilters";
 import {CreatureFilterConfig, SpellFilterConfig} from "../web/resolvers/genericDamageEventsResolver";
 
 @InterfaceType()
-export abstract class GenericDamageEvents {
-    protected events: Damage[]
+export abstract class GenericSummableEvents {
+    protected events: SummableEvent[]
     @Field()
     public total: number
     @Field()
@@ -43,12 +43,12 @@ export abstract class GenericDamageEvents {
         this.critTickTotal = 0
     }
 
-    add(events: Damage[]): void {
+    add(events: SummableEvent[]): void {
         for (const event of events) {
             this.events.push(event)
             this.total += event.amount
             this.count++
-            if(event.type === DamageType.Hit) {
+            if(event instanceof DamageHitEvent) {
                 this.hits++
                 if(event.crit) {
                     this.critHits++
@@ -156,16 +156,16 @@ export abstract class GenericDamageEvents {
     }
 }
 
-@ObjectType({implements: GenericDamageEvents, simpleResolvers: true})
-export class FilteredDamageEvents extends GenericDamageEvents {
+@ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
+export class FilteredDamageEvents extends GenericSummableEvents {
 
     constructor() {
         super();
     }
 }
 
-@ObjectType({implements: GenericDamageEvents, simpleResolvers: true})
-export class CreatureDamageEvents extends GenericDamageEvents {
+@ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
+export class CreatureDamageEvents extends GenericSummableEvents {
     @Field()
     public guid: string
     @Field()
@@ -178,8 +178,8 @@ export class CreatureDamageEvents extends GenericDamageEvents {
     }
 }
 
-@ObjectType({implements: GenericDamageEvents, simpleResolvers: true})
-export class SpellDamageEvents extends GenericDamageEvents {
+@ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
+export class SpellDamageEvents extends GenericSummableEvents {
     @Field()
     public spellId: number
     @Field()

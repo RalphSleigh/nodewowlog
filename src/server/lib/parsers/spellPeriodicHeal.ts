@@ -1,28 +1,27 @@
-import {Event} from "./lineParser";
+import {LogLine} from "./lineParser";
+import {HealingTickEvent} from "../data/event";
 
-export function SpellPeriodicHeal({dateTimeString, fields, encounter}: Event): void {
+export function SpellPeriodicHeal({dateTimeString, fields, encounter}: LogLine): void {
     // console.log(`parsing Spelldamage`);
     const time = encounter.getTimeOffset(dateTimeString)
 
-    //const sourceCreature = encounter.creatureManager.fromFields(fields, 0);
-    const targetCreature = encounter.creatureManager.fromFields(fields, 4);
-    //const spell = encounter.spellManager.fromFields(fields, 8);
+    const source = encounter.creatureManager.fromFields(fields, 0);
+    const target = encounter.creatureManager.fromFields(fields, 4);
+    const spell = encounter.spellManager.fromFields(fields, 8);
 
-    targetCreature.recordLocation(time, fields.parseNumber(23), fields.parseNumber(24))
-    /*
+    target.recordLocation(time, fields.parseNumber(23), fields.parseNumber(24))
+
     const amount = fields.parseNumber(28);
     const crit = fields.parseBoolean(35)
-    encounter.damageManager.add(
-        new Damage(
+    encounter.eventsManager.add(
+        new HealingTickEvent({
             encounter,
             time,
-            sourceCreature,
-            targetCreature,
+            source,
+            target,
             spell,
-            DamageType.Hit,
             amount,
-            crit
-        )
+            crit })
     );
-     */
+
 }

@@ -1,7 +1,7 @@
-import {Event} from "./lineParser";
+import {LogLine} from "./lineParser";
 import {AuraEvent, AuraEventType} from "../data/auraEvent";
 
-export function SpellAuraAppliedDose({dateTimeString, fields, encounter}: Event): void {
+export function SpellAuraAppliedDose({dateTimeString, fields, encounter}: LogLine): void {
 
     const time = encounter.getTimeOffset(dateTimeString)
 

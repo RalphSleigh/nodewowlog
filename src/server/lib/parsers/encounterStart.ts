@@ -1,12 +1,12 @@
 import { Encounter, EncounterStatus } from "../data/encounter";
-import { Event } from "./lineParser";
+import { LogLine } from "./lineParser";
 
 export function EncounterStart({
   dateTimeString,
   fields,
   encounter,
   logFile,
-}: Event): void {
+}: LogLine): void {
   const id = fields.parseNumber(0);
   const name = fields.parseString(1);
   const difficulty = fields.parseNumber(2);

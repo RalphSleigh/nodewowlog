@@ -13,7 +13,7 @@ import { LogFile } from "../../data/logFile";
 import { ICreature} from "../../data/creature";
 import { CreatureFilters } from "../../data/creatureFilters";
 import {differenceInSeconds} from "date-fns";
-import {FilteredDamageEvents} from "../../data/genericDamageEvents";
+import {FilteredDamageEvents} from "../../data/genericSummableEvents";
 import {IsString} from "class-validator";
 import {Spell} from "../../data/spell";
 import {AuraEvent} from "../../data/auraEvent";
