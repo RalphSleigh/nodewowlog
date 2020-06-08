@@ -18,6 +18,8 @@ import {SpellAuraRemovedDose} from "./spellAuraRemovedDose";
 import {SpellHeal} from "./spellHeal";
 import {SpellPeriodicHeal} from "./spellPeriodicHeal";
 import {SpellEnergize} from "./spellEnergize";
+import {SpellAbsorbed} from "./spellAbsorbed";
+import {SwingDamage} from "./swingDamage";
 
 export type getDate = () => Date
 
@@ -36,6 +38,7 @@ export function parseLine(logFile: LogFile, line: string): void {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   try {
+
     const fields = lineSplitter(line);
     const [dateTimeString, type] = (fields.fields.shift() as string).split("  ");
 
@@ -75,6 +78,7 @@ const eventParsers: StringMap = {
   SPELL_CAST_SUCCESS: SpellCast,
   SPELL_PERIODIC_DAMAGE: SpellPeriodicDamage,
   RANGE_DAMAGE: RangeDamage,
+  SWING_DAMAGE: SwingDamage,
   SWING_DAMAGE_LANDED: SwingDamageLanded,
   SPELL_AURA_APPLIED: SpellAuraApplied,
   SPELL_AURA_REMOVED: SpellAuraRemoved,
@@ -82,5 +86,6 @@ const eventParsers: StringMap = {
   SPELL_AURA_REMOVED_DOSE: SpellAuraRemovedDose,
   SPELL_HEAL: SpellHeal,
   SPELL_PERIODIC_HEAL: SpellPeriodicHeal,
-  SPELL_ENERGIZE: SpellEnergize
+  SPELL_ENERGIZE: SpellEnergize,
+  SPELL_ABSORBED: SpellAbsorbed
 };
