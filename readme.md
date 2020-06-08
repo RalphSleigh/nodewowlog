@@ -47,5 +47,6 @@ The advanced method *should* run on Mac/Linux without any modifications.
 ## Todo:
 
 * Healing pane
+* Buffs pane
 * Player deaths pane
 * More report cards
