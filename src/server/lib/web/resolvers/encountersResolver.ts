@@ -13,7 +13,7 @@ import { LogFile } from "../../data/logFile";
 import { ICreature} from "../../data/creature";
 import { CreatureFilters } from "../../data/creatureFilters";
 import {differenceInSeconds} from "date-fns";
-import {FilteredDamageEvents} from "../../data/genericSummableEvents";
+import {FilteredEvents} from "../../data/genericSummableEvents";
 import {IsString} from "class-validator";
 import {Spell} from "../../data/spell";
 import {AuraEvent} from "../../data/auraEvent";
@@ -44,8 +44,8 @@ export class EncounterResolver {
     return encounter.spellManager.graphGetSpells()
   }
 
-  @FieldResolver(() => FilteredDamageEvents)
-  filteredDamageEvents(@Root() encounter: Encounter): FilteredDamageEvents {
+  @FieldResolver(() => FilteredEvents)
+  filteredEvents(@Root() encounter: Encounter): FilteredEvents {
     return encounter.graphFilteredEvents()
   }
 

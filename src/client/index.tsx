@@ -65,7 +65,7 @@ const App: FC = () => {
                 <Tabs value={tab}  onChange={(event, newValue) => {
                     setTab(newValue);
                     }}>
-                <Tab label="Event" value="1"/>
+                <Tab label="Damage" value="1"/>
                 <Tab label="Report Card" value="2"/>
                 </Tabs>
                 </Toolbar>

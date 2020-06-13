@@ -20,7 +20,7 @@ export const WRATHION_REPORT_CARD_QUERY = gql`
                     }
                 }
             }
-            tail: filteredDamageEvents {
+            tail: filteredEvents {
                 filterSpell(spellId: 307974) {
                     byTarget {
                         ...CreatureEventsFields

@@ -94,7 +94,7 @@ export type Encounter = {
   endTime: Scalars['DateTime'];
   creatures: Array<ICreature>;
   spells: Array<Spell>;
-  filteredDamageEvents: FilteredDamageEvents;
+  filteredEvents: FilteredEvents;
   filteredAuraEvents: FilteredAuraEvents;
   duration: Scalars['Float'];
 };
@@ -108,8 +108,8 @@ export type Spell = {
   iconUrl: Scalars['String'];
 };
 
-export type FilteredDamageEvents = GenericDamageEvents & {
-   __typename?: 'FilteredDamageEvents';
+export type FilteredEvents = GenericSummableEvents & {
+   __typename?: 'FilteredEvents';
   total: Scalars['Float'];
   count: Scalars['Float'];
   hits: Scalars['Float'];
@@ -123,32 +123,33 @@ export type FilteredDamageEvents = GenericDamageEvents & {
   bySpell: Array<SpellDamageEvents>;
   bySource: Array<CreatureDamageEvents>;
   byTarget: Array<CreatureDamageEvents>;
-  timeSlice: Array<FilteredDamageEvents>;
-  filterSource: FilteredDamageEvents;
-  filterTarget: FilteredDamageEvents;
-  filterSpell: FilteredDamageEvents;
+  timeSlice: Array<FilteredEvents>;
+  filterDamage: FilteredEvents;
+  filterSource: FilteredEvents;
+  filterTarget: FilteredEvents;
+  filterSpell: FilteredEvents;
 };
 
 
-export type FilteredDamageEventsFilterSourceArgs = {
+export type FilteredEventsFilterSourceArgs = {
   filter?: Maybe<CreatureFilters>;
   guid?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
 
-export type FilteredDamageEventsFilterTargetArgs = {
+export type FilteredEventsFilterTargetArgs = {
   filter?: Maybe<CreatureFilters>;
   guid?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
 
-export type FilteredDamageEventsFilterSpellArgs = {
+export type FilteredEventsFilterSpellArgs = {
   spellId: Scalars['Float'];
 };
 
-export type GenericDamageEvents = {
+export type GenericSummableEvents = {
   total: Scalars['Float'];
   count: Scalars['Float'];
   hits: Scalars['Float'];
@@ -161,7 +162,7 @@ export type GenericDamageEvents = {
   critTickTotal: Scalars['Float'];
 };
 
-export type SpellDamageEvents = GenericDamageEvents & {
+export type SpellDamageEvents = GenericSummableEvents & {
    __typename?: 'SpellDamageEvents';
   total: Scalars['Float'];
   count: Scalars['Float'];
@@ -178,10 +179,11 @@ export type SpellDamageEvents = GenericDamageEvents & {
   bySpell: Array<SpellDamageEvents>;
   bySource: Array<CreatureDamageEvents>;
   byTarget: Array<CreatureDamageEvents>;
-  timeSlice: Array<FilteredDamageEvents>;
-  filterSource: FilteredDamageEvents;
-  filterTarget: FilteredDamageEvents;
-  filterSpell: FilteredDamageEvents;
+  timeSlice: Array<FilteredEvents>;
+  filterDamage: FilteredEvents;
+  filterSource: FilteredEvents;
+  filterTarget: FilteredEvents;
+  filterSpell: FilteredEvents;
 };
 
 
@@ -203,7 +205,7 @@ export type SpellDamageEventsFilterSpellArgs = {
   spellId: Scalars['Float'];
 };
 
-export type CreatureDamageEvents = GenericDamageEvents & {
+export type CreatureDamageEvents = GenericSummableEvents & {
    __typename?: 'CreatureDamageEvents';
   total: Scalars['Float'];
   count: Scalars['Float'];
@@ -220,10 +222,11 @@ export type CreatureDamageEvents = GenericDamageEvents & {
   bySpell: Array<SpellDamageEvents>;
   bySource: Array<CreatureDamageEvents>;
   byTarget: Array<CreatureDamageEvents>;
-  timeSlice: Array<FilteredDamageEvents>;
-  filterSource: FilteredDamageEvents;
-  filterTarget: FilteredDamageEvents;
-  filterSpell: FilteredDamageEvents;
+  timeSlice: Array<FilteredEvents>;
+  filterDamage: FilteredEvents;
+  filterSource: FilteredEvents;
+  filterTarget: FilteredEvents;
+  filterSpell: FilteredEvents;
 };
 
 
@@ -338,21 +341,24 @@ export type EncounterDamageGraphQuery = (
   { __typename?: 'Query' }
   & { Encounter: (
     { __typename?: 'Encounter' }
-    & { filteredDamageEvents: (
-      { __typename?: 'FilteredDamageEvents' }
-      & { filterSource: (
-        { __typename?: 'FilteredDamageEvents' }
-        & { filterTarget: (
-          { __typename?: 'FilteredDamageEvents' }
-          & Pick<FilteredDamageEvents, 'count' | 'total'>
-          & { timeSlice: Array<(
-            { __typename?: 'FilteredDamageEvents' }
-            & { bySource: Array<(
-              { __typename?: 'CreatureDamageEvents' }
-              & CreatureEventsFieldsFragment
+    & { filteredEvents: (
+      { __typename?: 'FilteredEvents' }
+      & { filterDamage: (
+        { __typename?: 'FilteredEvents' }
+        & { filterSource: (
+          { __typename?: 'FilteredEvents' }
+          & { filterTarget: (
+            { __typename?: 'FilteredEvents' }
+            & Pick<FilteredEvents, 'count' | 'total'>
+            & { timeSlice: Array<(
+              { __typename?: 'FilteredEvents' }
+              & { bySource: Array<(
+                { __typename?: 'CreatureDamageEvents' }
+                & CreatureEventsFieldsFragment
+              )> }
+              & FilteredEventsFieldsFragment
             )> }
-            & FilteredEventsFieldsFragment
-          )> }
+          ) }
         ) }
       ) }
     ) }
@@ -378,22 +384,25 @@ export type DamageTableQuery = (
   { __typename?: 'Query' }
   & { Encounter: (
     { __typename?: 'Encounter' }
-    & { filteredDamageEvents: (
-      { __typename?: 'FilteredDamageEvents' }
-      & { filterSource: (
-        { __typename?: 'FilteredDamageEvents' }
-        & { filterTarget: (
-          { __typename?: 'FilteredDamageEvents' }
-          & { bySource: Array<(
-            { __typename?: 'CreatureDamageEvents' }
-            & BySourceFieldsFragment
-          )>, byTarget: Array<(
-            { __typename?: 'CreatureDamageEvents' }
-            & ByTargetFieldsFragment
-          )>, bySpell: Array<(
-            { __typename?: 'SpellDamageEvents' }
-            & BySpellFieldsFragment
-          )> }
+    & { filteredEvents: (
+      { __typename?: 'FilteredEvents' }
+      & { filterDamage: (
+        { __typename?: 'FilteredEvents' }
+        & { filterSource: (
+          { __typename?: 'FilteredEvents' }
+          & { filterTarget: (
+            { __typename?: 'FilteredEvents' }
+            & { bySource: Array<(
+              { __typename?: 'CreatureDamageEvents' }
+              & BySourceFieldsFragment
+            )>, byTarget: Array<(
+              { __typename?: 'CreatureDamageEvents' }
+              & ByTargetFieldsFragment
+            )>, bySpell: Array<(
+              { __typename?: 'SpellDamageEvents' }
+              & BySpellFieldsFragment
+            )> }
+          ) }
         ) }
       ) }
     ) }
@@ -477,8 +486,8 @@ export type CreatureEventsFieldsFragment = (
 );
 
 export type FilteredEventsFieldsFragment = (
-  { __typename?: 'FilteredDamageEvents' }
-  & Pick<FilteredDamageEvents, 'count' | 'total'>
+  { __typename?: 'FilteredEvents' }
+  & Pick<FilteredEvents, 'count' | 'total'>
 );
 
 export type SpellFieldsFragment = (
@@ -608,9 +617,9 @@ export type WraithionReportCardQuery = (
         ) }
       ) }
     ), tail: (
-      { __typename?: 'FilteredDamageEvents' }
+      { __typename?: 'FilteredEvents' }
       & { filterSpell: (
-        { __typename?: 'FilteredDamageEvents' }
+        { __typename?: 'FilteredEvents' }
         & { byTarget: Array<(
           { __typename?: 'CreatureDamageEvents' }
           & CreatureEventsFieldsFragment
@@ -645,8 +654,8 @@ export type WraithionReportCardQuery = (
       "Creature",
       "Player"
     ],
-    "GenericDamageEvents": [
-      "FilteredDamageEvents",
+    "GenericSummableEvents": [
+      "FilteredEvents",
       "SpellDamageEvents",
       "CreatureDamageEvents"
     ],

@@ -1,15 +1,17 @@
-import {DamageHitEvent, SummableEvent} from "./event";
+import {DamageEvent, DamageHitEvent, HealingEvent, SummableEvent} from "./event";
 import {Field, InterfaceType, ObjectType} from "type-graphql";
 import {ICreature} from "./creature";
 import {Spell} from "./spell";
 import {getCreatureFilterFunction} from "./creatureFilters";
-import {CreatureFilterConfig, SpellFilterConfig} from "../web/resolvers/genericDamageEventsResolver";
+import {CreatureFilterConfig, SpellFilterConfig} from "../web/resolvers/genericEventsResolver";
 
 @InterfaceType()
 export abstract class GenericSummableEvents {
     protected events: SummableEvent[]
     @Field()
     public total: number
+    @Field()
+    public absorb: number
     @Field()
     public count: number
     @Field()
@@ -32,6 +34,7 @@ export abstract class GenericSummableEvents {
     protected constructor() {
         this.events = []
         this.total = 0
+        this.absorb = 0
         this.count = 0
         this.hits = 0
         this.ticks = 0
@@ -46,70 +49,62 @@ export abstract class GenericSummableEvents {
     add(events: SummableEvent[]): void {
         for (const event of events) {
             this.events.push(event)
-            this.total += event.amount
-            this.count++
-            if(event instanceof DamageHitEvent) {
-                this.hits++
-                if(event.crit) {
-                    this.critHits++
-                    this.critHitTotal += event.amount
-                } else {
-                    this.hitTotal += event.amount
-                }
-            } else {
-                this.ticks++
-
-                if(event.crit) {
-                    this.critTicks++
-                    this.critTickTotal += event.amount
-                } else {
-                    this.tickTotal += event.amount
-                }
-            }
+            event.sum(this) //event knows how to sum itself
         }
-
     }
 
-    timeslice(): FilteredDamageEvents[] {
-        const results: FilteredDamageEvents[] = []
+    timeslice(): GenericSummableEvents[] {
+        const results: FilteredEvents[] = []
 
         this.events.forEach(e => {
             const slice = Math.floor(e.time / 5000)
-            if(!results[slice]) results[slice] = new FilteredDamageEvents()
+            if(!results[slice]) results[slice] = new FilteredEvents()
             results[slice].add([e])
         })
 
         return results
     }
 
-    filterSource(filter: CreatureFilterConfig): FilteredDamageEvents {
+    filterDamage(): FilteredEvents {
+        const result = new FilteredEvents()
+        result.add(this.events.filter(e => e instanceof DamageEvent))
+        return result
+    }
+
+    filterHealing(): FilteredEvents {
+        const result = new FilteredEvents()
+        result.add(this.events.filter(e => e instanceof HealingEvent))
+        return result
+    }
+
+    filterSource(filter: CreatureFilterConfig): FilteredEvents {
         const filterFunction = getCreatureFilterFunction(
             filter.filter,
             { guid: filter.guid, name: filter.name}
         );
-        const result = new FilteredDamageEvents()
+        const result = new FilteredEvents()
         result.add(this.events.filter(e => e.filterSource(filterFunction)))
         return result
     }
 
-    filterTarget(filter: CreatureFilterConfig): FilteredDamageEvents {
+    filterTarget(filter: CreatureFilterConfig): FilteredEvents {
         const filterFunction = getCreatureFilterFunction(
             filter.filter,
             { guid: filter.guid, name: filter.name}
         );
-        const result = new FilteredDamageEvents()
+        const result = new FilteredEvents()
         result.add(this.events.filter(e => e.filterTarget(filterFunction)))
         return result
     }
 
-    filterSpell(filter: SpellFilterConfig): FilteredDamageEvents {
-        const result = new FilteredDamageEvents()
+    filterSpell(filter: SpellFilterConfig): FilteredEvents {
+        const result = new FilteredEvents()
         result.add(this.events.filter(e => e.spell.id === filter.spellId))
         return result
     }
 
-    bySource(): CreatureDamageEvents[] {
-        const results: CreatureDamageEvents[] = []
+    bySource(): CreatureEvents[] {
+        const results: CreatureEvents[] = []
 
         for (const event of this.events) {
 
@@ -117,7 +112,7 @@ export abstract class GenericSummableEvents {
 
             let item = results.find(cE => cE.creature === event.source)
             if (!item) {
-                item = new CreatureDamageEvents(event.source)
+                item = new CreatureEvents(event.source)
                 results.push(item)
             }
             item.add([event])
@@ -126,12 +121,12 @@ export abstract class GenericSummableEvents {
         return results
     }
 
-    byTarget(): CreatureDamageEvents[] {
-        const results: CreatureDamageEvents[] = []
+    byTarget(): CreatureEvents[] {
+        const results: CreatureEvents[] = []
         for (const event of this.events) {
             let item = results.find(cE => cE.creature === event.target)
             if (!item) {
-                item = new CreatureDamageEvents(event.target)
+                item = new CreatureEvents(event.target)
                 results.push(item)
             }
             item.add([event])
@@ -140,13 +135,13 @@ export abstract class GenericSummableEvents {
         return results
     }
 
-    bySpell(): SpellDamageEvents[] {
-        const results: SpellDamageEvents[] = []
+    bySpell(): SpellEvents[] {
+        const results: SpellEvents[] = []
 
         for (const event of this.events) {
             let item = results.find(cE => cE.spell === event.spell)
             if (!item) {
-                item = new SpellDamageEvents(event.spell)
+                item = new SpellEvents(event.spell)
                 results.push(item)
             }
             item.add([event])
@@ -157,7 +152,7 @@ export abstract class GenericSummableEvents {
 }
 
 @ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
-export class FilteredDamageEvents extends GenericSummableEvents {
+export class FilteredEvents extends GenericSummableEvents {
 
     constructor() {
         super();
@@ -165,7 +160,7 @@ export class FilteredDamageEvents extends GenericSummableEvents {
 }
 
 @ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
-export class CreatureDamageEvents extends GenericSummableEvents {
+export class CreatureEvents extends GenericSummableEvents {
     @Field()
     public guid: string
     @Field()
@@ -179,7 +174,7 @@ export class CreatureDamageEvents extends GenericSummableEvents {
 }
 
 @ObjectType({implements: GenericSummableEvents, simpleResolvers: true})
-export class SpellDamageEvents extends GenericSummableEvents {
+export class SpellEvents extends GenericSummableEvents {
     @Field()
     public spellId: number
     @Field()

@@ -4,15 +4,17 @@ import {CreatureEventsFields, EncounterFields, FilteredEventsFields} from "./fra
 export const DAMAGE_GRAPH_QUERY = gql`
     query EncounterDamageGraph($id: Float!) {
         Encounter(id: $id) {
-            filteredDamageEvents {
-                filterSource(filter: Players) {
-                    filterTarget(filter: Hostile) {
-                        count
-                        total
-                        timeSlice {
-                            ...FilteredEventsFields
-                            bySource {
-                                ...CreatureEventsFields
+            filteredEvents {
+                filterDamage {
+                    filterSource(filter: Players) {
+                        filterTarget(filter: Hostile) {
+                            count
+                            total
+                            timeSlice {
+                                ...FilteredEventsFields
+                                bySource {
+                                    ...CreatureEventsFields
+                                }
                             }
                         }
                     }

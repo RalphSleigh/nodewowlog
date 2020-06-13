@@ -3,7 +3,7 @@ import { CreatureManager } from "./creatureManager";
 import { SpellManager } from "./spellManager";
 import { EventsManager } from "./eventsManager";
 import {isFuture, sub} from "date-fns";
-import {FilteredDamageEvents} from "./genericSummableEvents";
+import {FilteredEvents} from "./genericSummableEvents";
 import {AuraManager} from "./auraManager";
 import {AuraEventsManager} from "./auraEventsManager";
 import {FilteredAuraEvents} from "./filteredAuraEvents";
@@ -115,8 +115,8 @@ export class Encounter {
         + (milliseconds - this._milliseconds)
   }
 
-  graphFilteredEvents(): FilteredDamageEvents {
-    const filteredEvents = new FilteredDamageEvents()
+  graphFilteredEvents(): FilteredEvents {
+    const filteredEvents = new FilteredEvents()
     filteredEvents.add(this.eventsManager.events.filter(e => e instanceof SummableEvent) as SummableEvent[])
     return filteredEvents
   }

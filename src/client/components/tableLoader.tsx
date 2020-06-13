@@ -59,7 +59,7 @@ export const TableLoader: FC<{
     let rows: TableRowData[]
     let children: SubTableFunction[] = []
 
-    const graphData = data.Encounter.filteredDamageEvents.filterSource.filterTarget
+    const graphData = data.Encounter.filteredEvents.filterDamage.filterSource.filterTarget
 
     if (groupBy === GroupBy.Source) {
         if (mergeCreatures) {
