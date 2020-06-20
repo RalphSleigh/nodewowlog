@@ -4,18 +4,18 @@ import {useQuery} from "@apollo/client";
 import {
     CreatureFilters, DamageTableQueryVariables,
     EncounterInfoQuery,
-    EncounterInfoQueryVariables, FilteredDamageEventsFilterSourceArgs
+    EncounterInfoQueryVariables, FilteredEventsFilterSourceArgs
 } from "../queries/types";
 import {ENCOUNTER_INFO} from "../queries/encounter";
 import {CreatureChooser} from "./creatureChooser";
-import {TableLoader} from "./tableLoader";
+import {DamageTableLoader} from "./damageTableLoader";
 import {Box, Button, ButtonGroup, Grid, Paper} from "@material-ui/core";
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab';
 
 export interface FilterSet {
-    type: FilteredDamageEventsFilterSourceArgs["filter"];
-    guid?: FilteredDamageEventsFilterSourceArgs["guid"];
-    name?: FilteredDamageEventsFilterSourceArgs["name"];
+    type: FilteredEventsFilterSourceArgs["filter"];
+    guid?: FilteredEventsFilterSourceArgs["guid"];
+    name?: FilteredEventsFilterSourceArgs["name"];
 }
 
 export interface FilterSetState extends FilterSet {
@@ -61,7 +61,7 @@ export enum GroupBy {
     Spell
 }
 
-export const EncounterView: FC<{ encounterId: number; live: boolean }> = ({encounterId, live}) => {
+export const DamageTableView: FC<{ encounterId: number; live: boolean }> = ({encounterId, live}) => {
 
     const {loading, error, data} = useQuery<EncounterInfoQuery, EncounterInfoQueryVariables>(ENCOUNTER_INFO, {
         variables: {id: encounterId},
@@ -118,13 +118,13 @@ export const EncounterView: FC<{ encounterId: number; live: boolean }> = ({encou
             </Box>
         </Grid>
         <Grid item sm={12}>
-        <TableLoader encounterId={encounterId}
-                     selectedCreature={selectedCreature}
-                     updateSelectedCreature={updateSelectedCreature}
-                     filter={eventFilter}
-                     mergeCreatures={merge}
-                     groupBy={groupBy}
-                     live={live}
+        <DamageTableLoader encounterId={encounterId}
+                           selectedCreature={selectedCreature}
+                           updateSelectedCreature={updateSelectedCreature}
+                           filter={eventFilter}
+                           mergeCreatures={merge}
+                           groupBy={groupBy}
+                           live={live}
         />
         </Grid>
     </Grid>

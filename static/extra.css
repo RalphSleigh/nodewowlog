@@ -226,6 +226,18 @@ body {
     height: 15px;
 }
 
+.tableBar .absorb {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+            -45deg,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.2) 10px,
+            rgba(255, 255, 255, 0) 10px,
+            rgba(255, 255, 255, 0) 20px
+    );
+}
+
 .tableBar > div:nth-child(even) {
     opacity: 0.8;
 }

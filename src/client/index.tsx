@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {ApolloClient, HttpLink, InMemoryCache, ApolloProvider} from '@apollo/client';
 import {EncounterChooser} from './components/encounterChooser'
 import result from "./queries/types";
-import {EncounterView} from "./components/encounterView";
+import {DamageTableView} from "./components/damageTableView";
 import {
     AppBar, Container,
     createMuiTheme, CssBaseline,
@@ -17,6 +17,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {TabContext, TabPanel} from "@material-ui/lab";
 import {purple} from "@material-ui/core/colors";
 import {ReportCardLoader} from "./components/ReportCardLoader";
+import {HealingTableView} from "./components/healingTableView";
 
 const client = new ApolloClient({
     cache: new InMemoryCache({possibleTypes: result.possibleTypes}),
@@ -66,15 +67,19 @@ const App: FC = () => {
                     setTab(newValue);
                     }}>
                 <Tab label="Damage" value="1"/>
-                <Tab label="Report Card" value="2"/>
+                <Tab label="Healing" value="2"/>
+                <Tab label="Report Card" value="3"/>
                 </Tabs>
                 </Toolbar>
             </AppBar>
             <Container maxWidth={false}>
                 <TabPanel value="1">
-                    {encounter === 0 ? null : <EncounterView encounterId={encounter} live={live}/>}
+                    {encounter === 0 ? null : <DamageTableView encounterId={encounter} live={live}/>}
                 </TabPanel>
                 <TabPanel value="2">
+                    {encounter === 0 ? null : <HealingTableView encounterId={encounter} live={live}/>}
+                </TabPanel>
+                <TabPanel value="3">
                     {encounter === 0 ? null : <ReportCardLoader encounterId={encounter} live={live}/>}
                 </TabPanel>
             </Container>

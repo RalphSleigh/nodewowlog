@@ -15,13 +15,35 @@ export const CreatureTableCellBar: FC<{max: number; creatures: CreatureEventsFie
             barClass = 'classBGColour0'
     }
 
-    const bars = creatures.map((c, i) => <div
-        key={i}
-        className={barClass}
-        style={{
-            width:`${c.total*100/max}%`,
-        }}
-    />)
+    const bars = creatures.map((c, i) => {
+        const result = []
+
+        if(c.total > 0) {
+            result.push(<div
+                key={i+'direct'}
+                className={barClass}
+                style={{
+                    width:`${c.total*100/max}%`,
+                }}
+            />)
+        }
+
+        if(c.absorb > 0) {
+            result.push(<div
+                key={i+'absorb'}
+                className={barClass}
+                style={{
+                    width:`${c.absorb*100/max}%`,
+                }}
+            >
+                <div className='absorb' />
+            </div>)
+        }
+
+        return <React.Fragment key={i}>
+            {result}
+        </React.Fragment>
+    })
 
     return  <div className="tableBar">
         {bars}
@@ -31,14 +53,41 @@ export const CreatureTableCellBar: FC<{max: number; creatures: CreatureEventsFie
 export const SpellTableCellBar: FC<{max: number; spells: SpellEventsFieldsFragment[]}> = ({max, spells}) => {
 
 
-    const bars = spells.map((s, i) => <div
-        key={i}
-        style={{
-            width:`${s.total*100/max}%`,
-            background: spellBarBackground(spells[0].spell.school),
-            backgroundColor: spellBarBackground(spells[0].spell.school)
-        }}
-    />)
+    const bars = spells.map((s, i) => {
+        const result = []
+
+        if(s.total > 0) {
+            result.push(<div
+                key={i+'direct'}
+                style={{
+                    width:`${s.total*100/max}%`,
+                    background: spellBarBackground(spells[0].spell.school),
+                    backgroundColor: spellBarBackground(spells[0].spell.school)
+                }}
+            />)
+        }
+
+        if(s.absorb > 0) {
+            result.push(
+                <div
+                    key={i+'absorb'}
+                    style={{
+                        width:`${s.absorb*100/max}%`,
+                        background: spellBarBackground(spells[0].spell.school),
+                        backgroundColor: spellBarBackground(spells[0].spell.school)
+                    }}
+                >
+                    <div className='absorb' />
+                </div>)
+        }
+
+        return <React.Fragment key={i}>
+            {result}
+        </React.Fragment>
+
+
+
+    })
 
     return  <div className="tableBar">
         {bars}

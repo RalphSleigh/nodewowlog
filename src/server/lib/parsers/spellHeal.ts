@@ -11,8 +11,8 @@ export function SpellHeal({dateTimeString, fields, encounter}: LogLine): void {
 
     target.recordLocation(time, fields.parseNumber(23), fields.parseNumber(24))
 
-    const amount = fields.parseNumber(28);
-    const crit = fields.parseBoolean(35)
+    const amount = fields.parseNumber(28) - fields.parseNumber(30);
+    const crit = fields.parseBoolean(32)
 
     encounter.eventsManager.add(
         new HealingHitEvent({

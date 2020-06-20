@@ -1,7 +1,7 @@
 import React, {FC, ReactElement, useState} from "react";
 import {CreatureFieldsFragment, CreatureFilters} from "../queries/types";
 import {ClassColourName} from "./classColourName";
-import {FilterSet, FilterSetState} from "./encounterView";
+import {FilterSet, FilterSetState} from "./damageTableView";
 import {useTimeoutState} from "../util";
 import {
     usePopupState,

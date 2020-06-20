@@ -22,6 +22,7 @@ export const CreatureEventsFields = gql`
     fragment CreatureEventsFields on CreatureEvents {
         count
         total
+        absorb
         creature {
             ...CreatureFields
         }
@@ -33,6 +34,7 @@ export const FilteredEventsFields = gql`
     fragment FilteredEventsFields on FilteredEvents {
         count
         total
+        absorb
     }`
 
 export const SpellFields = gql`
@@ -47,6 +49,7 @@ export const SpellEventsFields = gql`
     fragment SpellEventsFields on SpellEvents {
         total
         count
+        absorb
         spell {
             ...SpellFields
         }
