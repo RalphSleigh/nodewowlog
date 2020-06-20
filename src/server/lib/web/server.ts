@@ -10,7 +10,7 @@ import {EncounterResolver} from "./resolvers/encountersResolver";
 import {PlayersResolver} from "./resolvers/playersResolver";
 import {imageCachedRequest} from "../cachingRequest";
 import {SpellResolver} from "./resolvers/spellResolver";
-import {CreatureEventsResolver, FilteredEventsResolver, SpellEventsResolver} from "./resolvers/genericDamageEventsResolver";
+import {CreatureEventsResolver, FilteredEventsResolver, SpellEventsResolver} from "./resolvers/genericEventsResolver";
 import http from "http";
 import path from "path";
 import {Creature} from "../data/creature";

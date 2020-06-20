@@ -13,7 +13,7 @@ export abstract class ICreature extends LogObject {
   @Field()
   public readonly guid: string;
   @Field()
-  public readonly friendly: boolean
+  public friendly: boolean
   @Field({nullable: true })
   public owner?: ICreature
   @Field()

@@ -31,7 +31,10 @@ Then browse to http://localhost:8080/
 ## FAQ
 
 **Q. Why?**  
-Lockdown, and I wanted a project to investigate GraphQL thats more interesting that a todo list.
+Lockdown, and I wanted a project to investigate GraphQL that's more interesting than a todo list.
+
+**Q. Should I use this?**  
+Probably not, but maybe some people want to parse logs locally without the log data leaving their computer.
 
 **Q. Most of the spell icons are missing?**  
 Two reasons here:
@@ -46,6 +49,7 @@ The advanced method *should* run on Mac/Linux without any modifications.
 
 ## Todo:
 
-* Healing pane
+* Buffs pane
 * Player deaths pane
 * More report cards
+* Decide if I want to remove Spirit of Redemption absorption from the healing table. 

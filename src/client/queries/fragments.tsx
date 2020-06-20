@@ -19,9 +19,10 @@ export const CreatureFields = gql`
         }`
 
 export const CreatureEventsFields = gql`
-    fragment CreatureEventsFields on CreatureDamageEvents {
+    fragment CreatureEventsFields on CreatureEvents {
         count
         total
+        absorb
         creature {
             ...CreatureFields
         }
@@ -30,9 +31,10 @@ export const CreatureEventsFields = gql`
 `
 
 export const FilteredEventsFields = gql`
-    fragment FilteredEventsFields on FilteredDamageEvents {
+    fragment FilteredEventsFields on FilteredEvents {
         count
         total
+        absorb
     }`
 
 export const SpellFields = gql`
@@ -44,9 +46,10 @@ export const SpellFields = gql`
         }`
 
 export const SpellEventsFields = gql`
-    fragment SpellEventsFields on SpellDamageEvents {
+    fragment SpellEventsFields on SpellEvents {
         total
         count
+        absorb
         spell {
             ...SpellFields
         }
@@ -55,7 +58,7 @@ export const SpellEventsFields = gql`
 `
 
 export const BySourceFields = gql`
-    fragment  BySourceFields on CreatureDamageEvents {
+    fragment  BySourceFields on CreatureEvents {
             ...CreatureEventsFields
             byTarget {
                 ...CreatureEventsFields
@@ -69,7 +72,7 @@ export const BySourceFields = gql`
 `
 
 export const ByTargetFields = gql`
-    fragment  ByTargetFields on CreatureDamageEvents {
+    fragment  ByTargetFields on CreatureEvents {
             ...CreatureEventsFields
             bySource {
                 ...CreatureEventsFields
@@ -83,7 +86,7 @@ export const ByTargetFields = gql`
 `
 
 export const BySpellFields = gql`
-    fragment  BySpellFields on SpellDamageEvents {
+    fragment  BySpellFields on SpellEvents {
             ...SpellEventsFields
             byTarget {
                 ...CreatureEventsFields

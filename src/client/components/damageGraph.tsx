@@ -41,7 +41,7 @@ export const DamageGraph: FC<{ encounterId: number; selectedCreature: string, li
 
 
 
-    const chartData = data.Encounter.filteredDamageEvents.filterSource.filterTarget.timeSlice.map((slice, index) => {
+    const chartData = data.Encounter.filteredEvents.filterDamage.filterSource.filterTarget.timeSlice.map((slice, index) => {
         const a: chartSlice = {name: `${index * 5} seconds`, total: slice.total}
         return slice.bySource.reduce((a: chartSlice, c) => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore

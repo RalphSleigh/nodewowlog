@@ -1,7 +1,7 @@
 import {Field, InterfaceType, ObjectType} from "type-graphql";
 import {AuraEvent, AuraEventType} from "./auraEvent";
 import {ICreature} from "./creature";
-import {CreatureDamageEvents} from "./genericDamageEvents";
+import {CreatureEvents} from "./genericSummableEvents";
 
 @InterfaceType()
 export class GenericFilteredAuraEvents {

@@ -1,7 +1,7 @@
 import {Args, Field, ObjectType} from "type-graphql";
 import {LogObject} from "./logObject";
 import {Encounter} from "./encounter";
-import {CreatureFilterConfig} from "../web/resolvers/genericDamageEventsResolver";
+import {CreatureFilterConfig} from "../web/resolvers/genericEventsResolver";
 import {CreatureInstant} from "./creatureInstant";
 import {getCreatureFilterFunction} from "./creatureFilters";
 

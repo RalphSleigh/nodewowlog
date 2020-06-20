@@ -1,13 +1,13 @@
 import { LogFields } from "./logFields";
 import { Encounter, EncounterStatus } from "../data/encounter";
-import { Event } from "./lineParser";
+import { LogLine } from "./lineParser";
 
 export function EncounterEnd({
   dateTimeString,
   fields,
   encounter,
   logFile,
-}: Event): void {
+}: LogLine): void {
 
   const success = fields.parseBoolean(4);
 

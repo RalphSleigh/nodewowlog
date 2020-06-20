@@ -64,7 +64,7 @@ export const DamageTable: FC<{ encounterId: number;
             <thead>
             <tr>
                 <th>Name</th>
-                <th colSpan={2}>Damage</th>
+                <th colSpan={2}>Event</th>
                 <th>DPS</th>
             </tr>
             </thead>

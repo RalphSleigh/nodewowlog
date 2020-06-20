@@ -1,28 +1,27 @@
 import React, {FC} from "react";
 import {
     BySourceFieldsFragment, BySpellFieldsFragment, ByTargetFieldsFragment,
-    CreatureEventsFieldsFragment, CreatureFieldsFragment,
-    DamageTableQuery,
-    DamageTableQueryVariables,
+    CreatureEventsFieldsFragment,
+    HealingTableQuery, HealingTableQueryVariables,
     SpellEventsFieldsFragment
 } from "../queries/types";
-import {GroupBy} from "./encounterView";
+import {GroupBy} from "./damageTableView";
 import {useQuery} from "@apollo/client";
-import {DAMAGE_TABLE_QUERY} from "../queries/damageTable";
-import {CreatureTable} from "./creatureTable";
-import {SpellTable} from "./spellTable";
-import {Box} from "@material-ui/core";
+import {SpellHealingTable} from "./spellHealingTable";
+import {CreatureHealingTable} from "./creatureHealingTable";
+import {HEALING_TABLE_QUERY} from "../queries/healingTableQuery";
 
-export interface TableRowData {
+export interface HealingTableRowData {
     creaturesEvents?: CreatureEventsFieldsFragment[];
     spellsEvents?: SpellEventsFieldsFragment[];
     bySource?: CreatureEventsFieldsFragment[];
     byTarget?: CreatureEventsFieldsFragment[];
     bySpell?: SpellEventsFieldsFragment[];
     total: number;
+    absorb: number;
 }
 
-export type SubTableFunction = (row: TableRowData) => React.ReactElement
+export type HealingSubTableFunction = (row: HealingTableRowData) => React.ReactElement
 
 export type EventsSource =
     BySourceFieldsFragment
@@ -31,14 +30,14 @@ export type EventsSource =
     | CreatureEventsFieldsFragment
     | SpellEventsFieldsFragment
 
-export const TableLoader: FC<{
+export const HealingTableLoader: FC<{
     encounterId: number;
     selectedCreature: string;
     updateSelectedCreature: React.Dispatch<React.SetStateAction<string>>;
-    filter: Partial<DamageTableQueryVariables>;
+    filter: Partial<HealingTableQueryVariables>;
     mergeCreatures: boolean;
     groupBy: GroupBy;
-    live: boolean
+    live: boolean;
 }> = ({encounterId, selectedCreature, updateSelectedCreature, filter, mergeCreatures, groupBy, live}) => {
     const variables = {
         id: encounterId, ...filter,
@@ -46,7 +45,7 @@ export const TableLoader: FC<{
         byTarget: groupBy === GroupBy.Target,
         bySpell: groupBy === GroupBy.Spell
     }
-    const {loading, error, data} = useQuery<DamageTableQuery, DamageTableQueryVariables>(DAMAGE_TABLE_QUERY, {
+    const {loading, error, data} = useQuery<HealingTableQuery, HealingTableQueryVariables>(HEALING_TABLE_QUERY, {
         variables: variables,
         pollInterval: live ? 1000 : 0
     });
@@ -56,84 +55,84 @@ export const TableLoader: FC<{
         return <>{`Error: ${error}`} </>
     }
 
-    let rows: TableRowData[]
-    let children: SubTableFunction[] = []
+    let rows: HealingTableRowData[]
+    let children: HealingSubTableFunction[] = []
 
-    const graphData = data.Encounter.filteredDamageEvents.filterSource.filterTarget
+    const graphData = data.Encounter.filteredEvents.filterHealing.filterSource.filterTarget
 
     if (groupBy === GroupBy.Source) {
         if (mergeCreatures) {
             rows = combineBySource(graphData.bySource)
             children = [
-                (row) => <CreatureTable
-                        key="target"
-                        encounter={data.Encounter}
-                        data={row.byTarget ? combineByTarget(row.byTarget) : undefined}/>,
-                (row) => <SpellTable
-                        encounter={data.Encounter}
-                        key="spells"
-                        data={row.bySpell ? combineBySpell(row.bySpell) : undefined}/>]
+                (row) => <CreatureHealingTable
+                    key="target"
+                    encounter={data.Encounter}
+                    data={row.byTarget ? combineByTarget(row.byTarget) : undefined}/>,
+                (row) => <SpellHealingTable
+                    encounter={data.Encounter}
+                    key="spells"
+                    data={row.bySpell ? combineBySpell(row.bySpell) : undefined}/>]
         } else {
             rows = graphData.bySource.map(noMergingMap)
             children = [
-                (row) => <CreatureTable
-                        key="target"
-                        encounter={data.Encounter}
-                        data={row.byTarget?.map(noMergingMap)}/>,
-                (row) => <SpellTable
+                (row) => <CreatureHealingTable
+                    key="target"
+                    encounter={data.Encounter}
+                    data={row.byTarget?.map(noMergingMap)}/>,
+                (row) => <SpellHealingTable
                     encounter={data.Encounter}
                     key="spells"
                     data={row.bySpell?.map(noMergingMap)}/>]
         }
 
-        return <CreatureTable data={rows}
-                              encounter={data.Encounter}
-                              selectedCreature={selectedCreature}
-                              updateSelectedCreature={updateSelectedCreature}
-        >{children}</CreatureTable>
+        return <CreatureHealingTable data={rows}
+                                    encounter={data.Encounter}
+                                    selectedCreature={selectedCreature}
+                                    updateSelectedCreature={updateSelectedCreature}
+        >{children}</CreatureHealingTable>
     } else if (groupBy === GroupBy.Target) {
         if (mergeCreatures) {
             rows = combineByTarget(graphData.byTarget)
             children = [
-                (row) => <CreatureTable
-                            key="source"
-                            encounter={data.Encounter}
-                            data={row.bySource ? combineBySource(row.bySource) : undefined}/>
+                (row) => <CreatureHealingTable
+                    key="source"
+                    encounter={data.Encounter}
+                    data={row.bySource ? combineBySource(row.bySource) : undefined}/>
                 ,
-                (row) => <SpellTable
-                            encounter={data.Encounter}
-                            key="spells"
-                            data={row.bySpell ? combineBySpell(row.bySpell) : undefined}/>]
+                (row) => <SpellHealingTable
+                    encounter={data.Encounter}
+                    key="spells"
+                    data={row.bySpell ? combineBySpell(row.bySpell) : undefined}/>]
         } else {
             rows = graphData.byTarget.map(noMergingMap)
             children = [
-                (row) => <CreatureTable
+                (row) => <CreatureHealingTable
                     key="source"
                     encounter={data.Encounter}
                     data={row.bySource?.map(noMergingMap)}/>,
-                (row) => <SpellTable
+                (row) => <SpellHealingTable
                     encounter={data.Encounter}
                     key="spells"
                     data={row.bySpell?.map(noMergingMap)}/>]
         }
 
-        return <CreatureTable data={rows}
-                              encounter={data.Encounter}
-                              selectedCreature={selectedCreature}
-                              updateSelectedCreature={updateSelectedCreature}
-        >{children}</CreatureTable>
+        return <CreatureHealingTable data={rows}
+                                    encounter={data.Encounter}
+                                    selectedCreature={selectedCreature}
+                                    updateSelectedCreature={updateSelectedCreature}
+        >{children}</CreatureHealingTable>
     } else {
         if (mergeCreatures) {
             rows = combineBySpell(graphData.bySpell)
             children = [
                 (row) =>
-                    <CreatureTable
+                    <CreatureHealingTable
                         key="source"
                         encounter={data.Encounter}
                         data={row.bySource ? combineBySource(row.bySource) : undefined}/>
                 ,
                 (row) =>
-                    <CreatureTable
+                    <CreatureHealingTable
                         key="target"
                         encounter={data.Encounter}
                         data={row.byTarget ? combineByTarget(row.byTarget) : undefined}/>]
@@ -141,26 +140,26 @@ export const TableLoader: FC<{
             rows = graphData.bySpell.map(noMergingMap)
             children = [
                 (row) =>
-                    <CreatureTable
-                    key="source"
-                    encounter={data.Encounter}
-                    data={row.bySource?.map(noMergingMap)}/>,
-                (row) => <CreatureTable
+                    <CreatureHealingTable
+                        key="source"
+                        encounter={data.Encounter}
+                        data={row.bySource?.map(noMergingMap)}/>,
+                (row) => <CreatureHealingTable
                     key="target"
                     encounter={data.Encounter}
                     data={row.byTarget?.map(noMergingMap)}/>]
         }
 
-        return <SpellTable data={rows}
+        return <SpellHealingTable data={rows}
                            encounter={data.Encounter}
                            selectedCreature={selectedCreature}
                            updateSelectedCreature={updateSelectedCreature}
-        >{children}</SpellTable>
+        >{children}</SpellHealingTable>
     }
 }
 
-function noMergingMap(source: EventsSource): TableRowData {
-    const result: TableRowData = {total: source.total}
+function noMergingMap(source: EventsSource): HealingTableRowData {
+    const result: HealingTableRowData = {total: source.total, absorb: source.absorb}
     if ("creature" in source) {
         result.creaturesEvents = [source]
     }
@@ -179,8 +178,9 @@ function noMergingMap(source: EventsSource): TableRowData {
     return result
 }
 
-function addSourceCreatureToRow(row: TableRowData, creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): void {
+function addSourceCreatureToRow(row: HealingTableRowData, creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): void {
     row.total += creatureEvents.total
+    row.absorb += creatureEvents.absorb
     row?.creaturesEvents?.push({...creatureEvents})
     if ("byTarget" in creatureEvents) {
         row.bySpell = [...(row.bySpell || []), ...creatureEvents.bySpell.map(t => ({...t}))]
@@ -188,11 +188,13 @@ function addSourceCreatureToRow(row: TableRowData, creatureEvents: BySourceField
     }
 }
 
-function mergeCreatureIntoRow(row: TableRowData, creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): void {
+function mergeCreatureIntoRow(row: HealingTableRowData, creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): void {
     row.total += creatureEvents.total
+    row.absorb += creatureEvents.absorb
     const existing = row.creaturesEvents?.find(c => c.creature.name === creatureEvents.creature.name)
     if (existing) {
         existing.total += creatureEvents.total
+        existing.absorb += creatureEvents.absorb
         existing.count += creatureEvents.count
     } else {
         row.creaturesEvents?.push({...creatureEvents});
@@ -203,6 +205,7 @@ function mergeCreatureIntoRow(row: TableRowData, creatureEvents: BySourceFieldsF
             const existing = a.find(e => e.creature.guid === c.creature.guid)
             if (existing) {
                 existing.total += c.total
+                existing.absorb += c.absorb
                 existing.count += c.count
             } else {
                 a.push({...c})
@@ -212,9 +215,10 @@ function mergeCreatureIntoRow(row: TableRowData, creatureEvents: BySourceFieldsF
     }
 }
 
-function newSourceCreatureRow(creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): TableRowData {
-    const result: TableRowData = {
+function newSourceCreatureRow(creatureEvents: BySourceFieldsFragment | CreatureEventsFieldsFragment): HealingTableRowData {
+    const result: HealingTableRowData = {
         total: creatureEvents.total,
+        absorb: creatureEvents.absorb,
         creaturesEvents: [{...creatureEvents}]
     }
     if ("byTarget" in creatureEvents) {
@@ -227,17 +231,17 @@ function newSourceCreatureRow(creatureEvents: BySourceFieldsFragment | CreatureE
     return result
 }
 
-function addTargetCreatureToRow(row: TableRowData, creatureEvents: ByTargetFieldsFragment | CreatureEventsFieldsFragment): void {
+function addTargetCreatureToRow(row: HealingTableRowData, creatureEvents: ByTargetFieldsFragment | CreatureEventsFieldsFragment): void {
     row.total += creatureEvents.total
-
+    row.absorb += creatureEvents.absorb
     const creatureEvent = row.creaturesEvents?.find(cE => cE.creature === creatureEvents.creature)
     if (creatureEvent) {
         creatureEvent.total += creatureEvents.total
+        creatureEvent.absorb += creatureEvents.absorb
         creatureEvent.count += creatureEvents.count
     } else {
         row.creaturesEvents?.push({...creatureEvents})
     }
-
 
     if ("bySource" in creatureEvents) {
         row.bySpell = [...(row.bySpell || []), ...creatureEvents.bySpell]
@@ -245,9 +249,10 @@ function addTargetCreatureToRow(row: TableRowData, creatureEvents: ByTargetField
     }
 }
 
-function newTargetCreatureRow(creatureEvents: ByTargetFieldsFragment | CreatureEventsFieldsFragment): TableRowData {
-    const result: TableRowData = {
+function newTargetCreatureRow(creatureEvents: ByTargetFieldsFragment | CreatureEventsFieldsFragment): HealingTableRowData {
+    const result: HealingTableRowData = {
         total: creatureEvents.total,
+        absorb: creatureEvents.absorb,
         creaturesEvents: [{...creatureEvents}]
     }
     if ("bySource" in creatureEvents) {
@@ -260,10 +265,10 @@ function newTargetCreatureRow(creatureEvents: ByTargetFieldsFragment | CreatureE
     return result
 }
 
-function combineBySource(sources: (BySourceFieldsFragment | CreatureEventsFieldsFragment)[]): TableRowData[] {
-    const results: TableRowData[] = []
+function combineBySource(sources: (BySourceFieldsFragment | CreatureEventsFieldsFragment)[]): HealingTableRowData[] {
+    const results: HealingTableRowData[] = []
 
-    return [...sources].reduce((a: TableRowData[], c: (BySourceFieldsFragment | CreatureEventsFieldsFragment)) => {
+    return [...sources].reduce((a: HealingTableRowData[], c: (BySourceFieldsFragment | CreatureEventsFieldsFragment)) => {
         if (c.creature.owner) {
             const existing = a.find(row => row.creaturesEvents?.[0].creature.guid === c.creature.owner?.guid)
             if (existing) {
@@ -297,10 +302,10 @@ function combineBySource(sources: (BySourceFieldsFragment | CreatureEventsFields
     }, results)
 }
 
-function combineByTarget(targets: (ByTargetFieldsFragment | CreatureEventsFieldsFragment)[]): TableRowData[] {
-    const results: TableRowData[] = []
+function combineByTarget(targets: (ByTargetFieldsFragment | CreatureEventsFieldsFragment)[]): HealingTableRowData[] {
+    const results: HealingTableRowData[] = []
 
-    return [...targets].reduce((a: TableRowData[], c: (BySourceFieldsFragment | CreatureEventsFieldsFragment)) => {
+    return [...targets].reduce((a: HealingTableRowData[], c: (BySourceFieldsFragment | CreatureEventsFieldsFragment)) => {
         const existing = a.find(row => row.creaturesEvents?.[0].creature.name === c.creature.name)
         if (existing) {
             addTargetCreatureToRow(existing, c)
@@ -311,8 +316,9 @@ function combineByTarget(targets: (ByTargetFieldsFragment | CreatureEventsFields
     }, results)
 }
 
-function addSpellEventToRow(row: TableRowData, spellEvents: BySpellFieldsFragment | SpellEventsFieldsFragment): void {
+function addSpellEventToRow(row: HealingTableRowData, spellEvents: BySpellFieldsFragment | SpellEventsFieldsFragment): void {
     row.total += spellEvents.total
+    row.absorb += spellEvents.absorb
     row?.spellsEvents?.push({...spellEvents})
     if ("bySource" in spellEvents) {
         row.bySource = [...(row.bySource || []), ...spellEvents.bySource]
@@ -320,9 +326,10 @@ function addSpellEventToRow(row: TableRowData, spellEvents: BySpellFieldsFragmen
     }
 }
 
-function newSpellEventRow(spellEvents: BySpellFieldsFragment | SpellEventsFieldsFragment): TableRowData {
-    const result: TableRowData = {
+function newSpellEventRow(spellEvents: BySpellFieldsFragment | SpellEventsFieldsFragment): HealingTableRowData {
+    const result: HealingTableRowData = {
         total: spellEvents.total,
+        absorb: spellEvents.absorb,
         spellsEvents: [{...spellEvents}]
     }
     if ("bySource" in spellEvents) {
@@ -335,10 +342,10 @@ function newSpellEventRow(spellEvents: BySpellFieldsFragment | SpellEventsFields
     return result
 }
 
-function combineBySpell(targets: (BySpellFieldsFragment | SpellEventsFieldsFragment)[]): TableRowData[] {
-    const results: TableRowData[] = []
+function combineBySpell(targets: (BySpellFieldsFragment | SpellEventsFieldsFragment)[]): HealingTableRowData[] {
+    const results: HealingTableRowData[] = []
 
-    return [...targets].reduce((a: TableRowData[], s: (BySpellFieldsFragment | SpellEventsFieldsFragment)) => {
+    return [...targets].reduce((a: HealingTableRowData[], s: (BySpellFieldsFragment | SpellEventsFieldsFragment)) => {
         const existing = a.find(row => row.spellsEvents?.[0].spell.name === s.spell.name)
         if (existing) {
             addSpellEventToRow(existing, s)

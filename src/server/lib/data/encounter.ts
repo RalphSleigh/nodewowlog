@@ -1,12 +1,13 @@
 import { Field, ObjectType } from "type-graphql";
 import { CreatureManager } from "./creatureManager";
 import { SpellManager } from "./spellManager";
-import { DamageManager } from "./damageManager";
+import { EventsManager } from "./eventsManager";
 import {isFuture, sub} from "date-fns";
-import {FilteredDamageEvents} from "./genericDamageEvents";
+import {FilteredEvents} from "./genericSummableEvents";
 import {AuraManager} from "./auraManager";
 import {AuraEventsManager} from "./auraEventsManager";
 import {FilteredAuraEvents} from "./filteredAuraEvents";
+import {DamageEvent, SummableEvent} from "./event";
 let idValue = 1000000;
 
 export enum EncounterStatus {
@@ -39,7 +40,7 @@ export class Encounter {
   private status: EncounterStatus;
   public readonly creatureManager: CreatureManager;
   public readonly spellManager: SpellManager;
-  public readonly damageManager: DamageManager;
+  public readonly eventsManager: EventsManager;
   public readonly auraManager: AuraManager;
   public readonly auraEventsManager: AuraEventsManager;
   private readonly _hours: number;
@@ -65,7 +66,7 @@ export class Encounter {
 
     this.creatureManager = new CreatureManager(this);
     this.spellManager = new SpellManager(this);
-    this.damageManager = new DamageManager(this);
+    this.eventsManager = new EventsManager(this);
     this.auraManager = new AuraManager(this)
     this.auraEventsManager = new AuraEventsManager(this)
 
@@ -114,9 +115,9 @@ export class Encounter {
         + (milliseconds - this._milliseconds)
   }
 
-  graphFilteredEvents(): FilteredDamageEvents {
-    const filteredEvents = new FilteredDamageEvents()
-    filteredEvents.add(this.damageManager.events)
+  graphFilteredEvents(): FilteredEvents {
+    const filteredEvents = new FilteredEvents()
+    filteredEvents.add(this.eventsManager.events.filter(e => e instanceof SummableEvent) as SummableEvent[])
     return filteredEvents
   }
 
