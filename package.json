@@ -90,7 +90,7 @@
     "@types/json-stable-stringify": "^1.0.32",
     "@types/tail": "^2.0.0",
     "@types/yargs": "^15.0.4",
-    "electron": "^8.3.0",
+    "electron": "^18.3.7",
     "electron-builder": "^22.6.0",
     "eslint-plugin-react": "^7.19.0",
     "webpack-cli": "^3.3.11"
