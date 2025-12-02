@@ -46,7 +46,7 @@
     "cache-manager": "^3.2.1",
     "cache-manager-fs": "^1.0.8",
     "cache-manager-fs-binary": "^1.0.4",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "date-fns": "^2.12.0",
     "debounce": "^1.2.0",
     "electron-updater": "^4.3.1",
